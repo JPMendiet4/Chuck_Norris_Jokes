@@ -41,11 +41,12 @@ class Login(TokenObtainPairView):
 
 class Logout(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
-        user = CustomUser.objects.filter(id=request.data.get('user'))
+        user = CustomUser.objects.filter(id=request.data.get('user', 0))
         if user.exists():
             RefreshToken.for_user(user.first())
             return Response({'message': 'Sesión cerrada exitosamente'}, status=status.HTTP_200_OK)
         return Response({'error': 'No se pudo cerrar la sesión'}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class GetJokeAPIView(APIView):
     serializer_class = JokeTextSerializer

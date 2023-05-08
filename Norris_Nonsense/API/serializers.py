@@ -31,15 +31,16 @@ class JokeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Joke
         fields = '__all__'
-        read_only_fields = ['joke', 'user', 'created_at', 'updated_at']
-
-    def validate(self, data):
-        if not data['favorites']:
-            raise serializers.ValidationError(
-                {'error': 'Solo se pueden agregar chistes favoritos'},
-            )
-        return data
 
     def create(self, validated_data):
-        joke = Joke.objects.create(**validated_data)
-        return joke
+        favorites = validated_data.get('favorites')
+        if favorites:
+            joke = Joke.objects.create(**validated_data)
+            return joke
+        else:
+            raise serializers.ValidationError("Solo se pueden agregar chistes favoritos")
+
+
+
+
+
