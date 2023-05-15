@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-uq@nrtlg2u3eda*gnowtxb5oyvwa64z0m!sdcb=p($g-cfgs#e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -141,3 +141,5 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
