@@ -14,6 +14,19 @@ class CustomUserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = '__all__'
 
+    def to_representation(self, instance):
+        return {
+                "password": instance.password,
+                "is_superuser": instance.is_superuser,
+                "username": instance.username,
+                "first_name": instance.first_name,
+                "last_name": instance.last_name,
+                "email": instance.email,
+                "is_staff": instance.is_staff,
+                "is_active": instance.is_active,
+                "name": instance.name
+        }
+
 
 class JokeTextSerializer(serializers.Serializer):
     def get_joke(self):

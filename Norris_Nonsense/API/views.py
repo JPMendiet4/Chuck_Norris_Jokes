@@ -3,6 +3,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from Norris_Nonsense.API.serializers import (
@@ -12,6 +13,12 @@ from Norris_Nonsense.API.serializers import (
     CustomUserSerializer,
 )
 from Norris_Nonsense.models import Joke, CustomUser
+
+
+class CreateUserAPIView(generics.CreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    permission_classes = [AllowAny]
 
 
 class Login(TokenObtainPairView):

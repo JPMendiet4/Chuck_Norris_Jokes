@@ -2,10 +2,11 @@ from django.urls import path
 from Norris_Nonsense.API.views import (
     GetJokeAPIView, MyJokesCreateAPIView, MyJokesListAPIView,
     MyJokesUpdateAPIView, MyJokesDeleteAPIView,
-    Login, Logout,
+    Login, Logout, CreateUserAPIView,
 )
 
 urlpatterns = [
+    path('users/create/', CreateUserAPIView.as_view(), name='Create User'),
     path('login/', Login.as_view(), name='Login'),
     path('logout/', Logout.as_view(), name='Logout'),
     path('jokes/random/', GetJokeAPIView.as_view(), name='Get Jokes'),
